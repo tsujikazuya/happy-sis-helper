@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model PostDraft {
+  id             String   @id @default(uuid())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  
+  // 入力条件
+  direction      String   // 方向性
+  theme          String   // テーマ
+  snsType        String   // 投稿先SNS
+  tone           String   // 文体・トーン
+  targetAudience String?  // 対象読者 (任意)
+  ctaType        String?  // CTA種別 (任意)
+  additionalInfo String?  // 追加指示 (任意)
+  
+  // AI生成結果
+  generatedTitle String
+  generatedHook  String
+  generatedBody  String
+  generatedShort String
+  generatedCta   String
+  generatedTags  String   // ハッシュタグ案
+  imageConcept   String   // 画像・動画の構成案
+}
